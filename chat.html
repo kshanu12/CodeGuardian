@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: #211747;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .displayNone {
+            display: none;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            width: 100%;
+            background: #fff;
+            height: 3.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #000;
+            box-shadow: 0px 5px 10px #000;
+        }
+
+        header img {
+            padding-left: 33px;
+        }
+
+        .headerOptions {
+            display: flex;
+            gap: 20px;
+            padding: calc(0.5rem + 33px);
+        }
+
+        header a {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            text-decoration: none;
+            color: #000;
+            font-size: 16px;
+            border-bottom: 3px solid #fff;
+        }
+
+        header a:hover {
+            border-bottom: 3px solid #2cc84d;
+        }
+
+        .message {
+            position: absolute;
+            width: 60vw;
+            bottom: 65px;
+            max-height: calc(100vh - 9rem);
+            overflow-y: scroll;
+            display: flex;
+            flex-direction: column;
+            gap: 150px;
+        }
+
+
+        .message::-webkit-scrollbar {
+            display: none;
+        }
+
+        .inputDiv {
+            border: 1px solid #fff;
+            border-radius: 8px;
+            padding: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            gap: 5px;
+            position: fixed;
+            bottom: 20px;
+            width: 59vw;
+            word-wrap: break-word;
+            word-break: break-all;
+            background: #211747;
+        }
+
+        #chatInput {
+            border: none;
+            background: transparent;
+            outline: none;
+            width: 100%;
+            padding: 0 0 0 5px;
+            color: #fff;
+            max-height: 150px;
+            word-wrap: break-word;
+            word-break: break-all;
+            overflow-y: scroll;
+            min-height: 25px;
+        }
+
+        #chatInput::-webkit-scrollbar {
+            display: none;
+        }
+
+        #sendQuestion {
+            margin-bottom: -4px;
+        }
+
+        .sendQuestion {
+            width: 20px;
+            color: #2cc84d;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 5px;
+            padding: 5px;
+            height: fit-content;
+        }
+
+        .sendQuestion:hover {
+            background: rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+        }
+
+        .chat {
+            color: #fff;
+            width: 100%;
+            margin-bottom: 5px;
+        }
+
+        .left {
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        .right {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .chatBorder {
+            max-width: 95%;
+            padding: 5px;
+            border: 1px dashed rgba(255, 255, 255, 0.5);
+            border-radius: 8px;
+        }
+
+        .left .chatBorder {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .right .chatBorder {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .code {
+            white-space: pre-wrap;
+            font-family: 'Courier New', monospace;
+            margin: 0;
+        }
+
+        .initialText {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-around;
+            height: 25vh;
+        }
+
+        #chatCodeTitlle {
+            color: #2cc84d;
+            font-size: 40px;
+        }
+
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .feature {
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            width: 30%;
+            padding: 15px;
+            border-radius: 8px;
+            color: rgba(255, 255, 255, 0.6);
+            margin: 5px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .loading {
+            display: flex;
+            align-items: center;
+            width: 20px;
+            color: #2cc84d;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 5px;
+            padding: 5px;
+            height: fit-content;
+        }
+
+        .loading img {
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <img src="https://www.brillio.com/wp-content/uploads/2022/01/Brillio_Primary-Logo_12.2021.svg">
+        <div class="headerOptions">
+            <a href="/index.html">Write Code</a>
+            <a href="/chat.html">ChatCode</a>
+        </div>
+    </header>
+    <div class="message">
+        <div class="initialText" id="initialText">
+            <div></div>
+            <h1 id="chatCodeTitlle">ChatCode</h1>
+            <div class="features">
+                <div class="feature">Code assistance</div>
+                <div class="feature">Syntax help</div>
+                <div class="feature">Problem-solving tips</div>
+                <div class="feature">Code optimization suggestions</div>
+            </div>
+        </div>
+        <div id="memory"></div>
+    </div>
+    <div class="inputDiv">
+        <div contenteditable id="chatInput" onkeydown="handleKeyDown(event)" onfocus="handleFocus()"
+            onblur="handleBlur()">Type your message here...</div>
+        <div class="displayNone" id="loadingGif">
+            <img src="loading.gif" alt="Loading..." width="20" height="20">
+        </div>
+        <div id="sendQuestion">
+            <svg onclick="chat()" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3"
+                stroke="currentColor" class="sendQuestion">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 19.5v-15m0 0l-6.75 6.75M12 4.5l6.75 6.75" />
+            </svg>
+        </div>
+    </div>
+
+    <script>
+        var memory = [];
+        memory.push({ "role": "system", "content": "You are a helpful assistant that assists in fixing software bugs. You just answer the question and don't add any other prompt. If the given prompt contains code which have bugs then, generate the corrected code with code explanation" })
+
+        var previousChatJSON = JSON.parse(localStorage.getItem("PreviousChat"));
+        // console.log(previousChatJSON)
+
+        memory.push({ "role": "user", "content": previousChatJSON.user })
+        memory.push({ "role": "assistant", "content": previousChatJSON.assistant })
+        localStorage.removeItem("PreviousChat")
+        console.log(memory)
+
+        var initialText = document.getElementById("initialText");
+        initialText.className = "displayNone";
+        var memoryDiv = document.getElementById("memory");
+        memoryDiv.innerHTML = "";
+        for (var i = 1; i < memory.length; i++) {
+            var entry = memory[i];
+            var entryDiv = document.createElement("div");
+            var entryContentDiv = document.createElement("div");
+            entryContentDiv.innerHTML = entry.content;
+            entryContentDiv.className = "chatBorder code";
+            entryDiv.className = entry.role === 'user' ? "chat left" : "chat right";
+            entryDiv.appendChild(entryContentDiv);
+            memoryDiv.appendChild(entryDiv);
+        }
+
+
+        function handleFocus() {
+            var chatInput = document.getElementById("chatInput");
+            if (chatInput.textContent === "Type your message here...") {
+                chatInput.textContent = '';
+            }
+        }
+        function handleBlur() {
+            var chatInput = document.getElementById("chatInput");
+            if (chatInput.textContent === '') {
+                chatInput.textContent = 'Type your message here...';
+            }
+        }
+        function handleKeyDown(event) {
+            if (event.key === 'Enter' && !event.shiftKey) {
+                event.preventDefault();
+                chat();
+            }
+        }
+        // function extractCodeBlocks(script) {
+        //     const codeBlocks = script.match(/```([\s\S]*?)```/g) || [];
+        //     return codeBlocks.map(codeBlock => codeBlock.slice(3, -3).trim());
+        // }
+        function chat() {
+            var loadingGif = document.getElementById("loadingGif");
+            var sendQuestion = document.getElementById("sendQuestion");
+            if (loadingGif.className === "loading" || document.getElementById("chatInput").textContent === "Type your message here..." || document.getElementById("chatInput").textContent === "") {
+                return;
+            }
+            loadingGif.className = "loading"
+            sendQuestion.className = "displayNone"
+            var initialText = document.getElementById("initialText");
+            initialText.className = "displayNone";
+            var chatInput = document.getElementById("chatInput");
+            console.log(chatInput.innerHTML)
+            console.log(chatInput.textContent)
+            // var codeInput = chatInput.textContent.replace(/\n/g, '<br>');
+            var codeInput = chatInput.innerHTML;
+            console.log(codeInput)
+            chatInput.textContent = '';
+            memory.push({ 'role': 'user', 'content': codeInput });
+            console.log(memory)
+            var memoryDiv = document.getElementById("memory");
+            memoryDiv.innerHTML = "";
+            for (var i = 1; i < memory.length; i++) {
+                var entry = memory[i];
+                var entryDiv = document.createElement("div");
+                var entryContentDiv = document.createElement("div");
+                entryContentDiv.innerHTML = entry.content;
+                entryContentDiv.className = "chatBorder code";
+                entryDiv.className = entry.role === 'user' ? "chat left" : "chat right";
+                entryDiv.appendChild(entryContentDiv);
+                memoryDiv.appendChild(entryDiv);
+            }
+            fetch('https://codeguardian.vercel.app/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ memory }),
+            }).then(response => response.json())
+                .then(chatOutput => {
+                    var co = chatOutput.chatOutput
+                    var chatOp = co.replace(/\n/g, '<br>');
+                    memory.push({ 'role': 'assistant', 'content': chatOp });
+                    var memoryDiv = document.getElementById("memory");
+                    var entry = memory[memory.length - 1];
+                    var entryDiv = document.createElement("div");
+                    var entryContentDiv = document.createElement("div");
+                    entryContentDiv.innerHTML = entry.content;
+                    entryContentDiv.className = "chatBorder code";
+                    entryDiv.appendChild(entryContentDiv);
+                    entryDiv.className = "chat right";
+                    memoryDiv.appendChild(entryDiv);
+                    loadingGif.className = "displayNone";
+                    sendQuestion.className = "";
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    sendQuestion.className = "";
+                });
+            console.log(memory)
+        }
+    </script>
+</body>
+
+</html>
