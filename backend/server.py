@@ -1,3 +1,5 @@
+from dotenv import load_dotenv
+import os
 from flask import Flask, request, jsonify
 from flask_cors import CORS, cross_origin
 import subprocess
@@ -6,13 +8,14 @@ import openai
 import re
 
 
+load_dotenv()
 app = Flask(__name__)
 # cors = CORS(app)
 CORS(app, resources={r"/": {"origins": ""}})
 # app.config['CORS_HEADERS'] = 'Content-Type'
 app.config['CORS_HEADERS'] = 'Content-Type, Access-Control-Allow-Origin'
 
-openai.api_key = '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'
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 def run(code, user_input, language):
     user_input = user_input
