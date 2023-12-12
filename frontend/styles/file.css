@@ -1,0 +1,188 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.contentDiv {
+    position: absolute;
+    top: 80px;
+    width: 60%;
+    overflow-y: scroll;
+    max-height: calc(100vh - 5rem);
+}
+
+.contentDiv::-webkit-scrollbar {
+    display: none;
+}
+
+.display_none {
+    display: none;
+}
+
+h2 {
+    color: #2cc84d;
+    font-family: 'Outfit', sans-serif;
+    padding: 20px 5px;
+}
+
+h3 {
+
+    color: #fff;
+    font-family: 'Outfit', sans-serif;
+    padding: 10px 5px;
+}
+
+.parentFileUploadDiv {
+    height: 200px;
+    width: calc(100% - 16px);
+    background: #fff;
+    border-radius: 12px;
+    padding: 8px;
+}
+
+.fileUploadDiv {
+    border-radius: 12px;
+    border: 1px dashed #d9d9d9;
+    width: 100%;
+    height: 100%;
+    background: #f2f1f1;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-family: 'Outfit', sans-serif;
+    gap: 10px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.fileUploadDiv:hover {
+    border: 1px dashed #5ea0fc;
+    background: #e3e3e3;
+}
+
+.fileUploadIcon {
+    color: #2cc84d;
+    width: 50px;
+}
+
+#selectedFileName {
+    font-size: 14px;
+    color: #5ea0fc;
+}
+
+#errorDiv {
+    font-size: 14px;
+    color: rgb(223, 3, 3);
+}
+
+.run_btn {
+    border: 2px solid #fff;
+    background: transparent;
+    border-radius: 8px;
+    height: 40px;
+    width: 120px;
+    color: #fff;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    cursor: pointer;
+    background: linear-gradient(to right, transparent 50%, rgba(255, 255, 255, 1) 50%);
+    background-size: 200% 100%;
+    transition: background-position 0.3s ease-in-out;
+}
+
+#run_btn:hover {
+    color: #000;
+    background-position: -100% 0;
+}
+
+.executeBtn {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60vw;
+}
+
+.gearIcon {
+    width: 20px;
+    color: #2cc84d;
+}
+
+.inputOutput {
+    margin: 40px 0;
+}
+
+#user_input {
+    width: 97%;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#suggestionDiv {
+    color: #000;
+    width: 58.5vw;
+    background: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.displayNone {
+    display: none;
+}
+
+#continueButton {
+    opacity: 60%;
+    border: 1px solid #fff;
+    border-radius: 8px;
+    height: 35px;
+    width: fit-content;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0 10px;
+    float: right;
+    margin: 20px -10px 0 0;
+}
+
+#continueButton:hover {
+    opacity: 1;
+}
+
+.proceedSvg {
+    width: 30px;
+    margin-left: 10px;
+    color: #2cc84d;
+    cursor: pointer;
+}
+
+.codeTitle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#selectLanguage {
+    margin-bottom: -35px;
+    border-radius: 3px;
+    padding: 5px 10px;
+}
+
+.loadingGif {
+    border: 2px solid #fff;
+    border-radius: 8px;
+    height: 36px;
+    width: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}

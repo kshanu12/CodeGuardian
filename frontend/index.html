@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit&display=swap" rel="stylesheet">
+    </link>
+    <link rel="stylesheet" href="./styles/global.css">
+    <title>CodeGuardian</title>
+    <link rel="icon" href="./logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="./styles/index.css">
+</head>
+
+<body>
+    <header>
+        <img src="https://www.brillio.com/wp-content/themes/brillio/assets/images/logo/Brillio_Secondary-Logo.svg"
+            alt="">
+        <div class="navItems">
+            <a href="/frontend/editor.html">Write Code</a>
+            <a href="/frontend/file.html">Upload File</a>
+            <a href="/frontend/chat.html" class="active">ChatCode</a>
+        </div>
+    </header>
+    <img class="topRight"
+        src="https://www.brillio.com/wp-content/themes/brillio/assets/images/elements/gradient-back.svg" alt="">
+    <img class="leftBottom"
+        src="https://www.brillio.com/wp-content/themes/brillio/assets/images/elements/lets-connect-gradient-left.svg"
+        alt="">
+    <div class="contentDiv">
+        <div class="selectChoice">
+            <div class="selectChoiceDivLine"></div>
+            <div class="selectChoiceTitle">Select the <span style="color: #2cc84d;"> choice</span></div>
+        </div>
+        <div class="choices">
+            <div class="choice">
+                <div class="choiceNumber">1</div>
+                <h2 class="choiceTitle">Write Code</h2>
+                <p>Choose this option if you prefer to manually input your code. Type or paste your code directly into
+                    the provided editor, and proceed to get instant suggestions and solutions for the identified bug.
+                    Ideal for users who want full control over the code input process.
+                </p>
+                <div class="proceedButton">
+                    <h3 class="proceedTitle" onclick="proceed(1)">PROCEED</h3>
+                    <svg onclick="proceed(1)" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                        stroke-width="2" stroke="currentColor" class="proceedSvg">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
+                    </svg>
+                </div>
+            </div>
+            <div class="choice">
+                <div class="choiceNumber">2</div>
+                <h2 class="choiceTitle">Upload File</h2>
+                <p>Opt for this option if you have your code saved in a file. Simply upload the file, and our tool will
+                    analyze its
+                    content
+                    to provide code suggestions and solutions. This method is convenient for users who want to work with
+                    existing code
+                    files
+                    without manual input.
+                </p>
+                <div class="proceedButton">
+                    <h3 class="proceedTitle" onclick="proceed(2)">PROCEED</h3>
+                    <svg onclick="proceed(2)" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                        stroke-width="2" stroke="currentColor" class="proceedSvg">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
+                    </svg>
+                </div>
+            </div>
+            <div class="choice">
+                <div class="choiceNumber">3</div>
+                <h2 class="choiceTitle">ChatCode</h2>
+                <p>ChatCode is your personal coding companion, ready to assist you with code-related queries. Whether
+                    you need help with
+                    debugging, syntax suggestions, or code optimization, ChatCode provides tailored solutions. Type your
+                    coding
+                    questions,
+                    and let ChatCode guide you through the process of enhancing your code.
+                </p>
+                <div class="proceedButton">
+                    <h3 class="proceedTitle" onclick="proceed(3)">PROCEED</h3>
+                    <svg onclick="proceed(3)" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                        stroke-width="2" stroke="currentColor" class="proceedSvg">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./scripts/index.js"></script>
+</body>
+
+</html>

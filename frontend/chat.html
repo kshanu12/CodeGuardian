@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeGuardian</title>
+    <link rel="icon" href="./logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="./styles/global.css">
+    <link rel="stylesheet" href="./styles/chat.css">
+</head>
+
+<body>
+    <header>
+        <a href="/frontend"> <img
+                src="https://www.brillio.com/wp-content/themes/brillio/assets/images/logo/Brillio_Secondary-Logo.svg"
+                alt=""></a>
+        <div class="navItems">
+            <a href="/frontend/editor.html">Write Code</a>
+            <a href="/frontend/file.html">Upload File</a>
+            <a href="/frontend/chat.html" class="active">ChatCode</a>
+        </div>
+    </header>
+    <img class="topRight"
+        src="https://www.brillio.com/wp-content/themes/brillio/assets/images/elements/gradient-back.svg" alt="">
+    <img class="leftBottom"
+        src="https://www.brillio.com/wp-content/themes/brillio/assets/images/elements/lets-connect-gradient-left.svg"
+        alt="">
+    <div class="message">
+        <div class="initialText" id="initialText">
+            <div></div>
+            <h1 id="chatCodeTitlle">ChatCode</h1>
+            <div class="features">
+                <div class="feature">Code assistance</div>
+                <div class="feature">Syntax help</div>
+                <div class="feature">Problem-solving tips</div>
+                <div class="feature">Code optimization suggestions</div>
+            </div>
+        </div>
+        <div id="memory"></div>
+    </div>
+    <div class="inputDiv">
+        <div contenteditable id="chatInput" onkeydown="handleKeyDown(event)" onfocus="handleFocus()"
+            onblur="handleBlur()">Type your message here...</div>
+        <div class="displayNone" id="loadingGif">
+            <img src="./assets/loading.gif" alt="Loading..." width="20" height="20">
+        </div>
+        <div id="sendQuestion">
+            <svg onclick="chat()" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3"
+                stroke="currentColor" class="sendQuestion">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 19.5v-15m0 0l-6.75 6.75M12 4.5l6.75 6.75" />
+            </svg>
+        </div>
+    </div>
+    <script src="./scripts/chat.js"></script>
+</body>
+
+</html>
