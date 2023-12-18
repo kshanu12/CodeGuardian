@@ -1,7 +1,7 @@
 var previousChat,
   userCode,
   mode = "python",
-  selectedLanguage,
+  selectedLanguage="python",
   codeMirrorInstance;
 var codeMirrorInstance = CodeMirror(document.querySelector("#code"), {
   lineNumbers: true,

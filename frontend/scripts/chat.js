@@ -11,42 +11,43 @@ var previousChatJSON = JSON.parse(localStorage.getItem("PreviousChat"));
 const filenamePattern = /"name":"([^"]+)"/g;
 var filenames = "";
 let match;
-while ((match = filenamePattern.exec(previousChatJSON.user)) !== null) {
-  // filenames.push(match[1]);
-  if (filenames.length === 0) filenames += match[1];
-  else filenames += ", " + match[1];
-}
+if (previousChatJSON) {
+  while ((match = filenamePattern.exec(previousChatJSON.user)) !== null) {
+    // filenames.push(match[1]);
+    if (filenames.length === 0) filenames += match[1];
+    else filenames += ", " + match[1];
+  }
 // console.log(filenames);
-var isMultipleFiles = false;
-if (previousChatJSON.user[0] === "[") {
-  isMultipleFiles = true;
+  var isMultipleFiles = false;
+  if (previousChatJSON.user[0] === "[") {
+    isMultipleFiles = true;
+  }
+  memory.push({ role: "user", content: previousChatJSON.user });
+  memory.push({ role: "assistant", content: previousChatJSON.assistant });
+  var initialText = document.getElementById("initialText");
+  initialText.className = "displayNone";
+  var memoryDiv = document.getElementById("memory");
+  memoryDiv.innerHTML = "";
+  for (var i = 1; i < memory.length; i++) {
+    var entry = memory[i];
+    var entryDiv = document.createElement("div");
+    var entryContentDiv = document.createElement("div");
+    if (isMultipleFiles) {
+      entryContentDiv.innerHTML =
+        'Files <span style="color:#aaa;">' + filenames + "</span> uploaded";
+      isMultipleFiles = false;
+    } else {
+      entryContentDiv.innerHTML = entry.content;
+    }
+    entryContentDiv.className = "chatBorder code";
+    entryDiv.className = entry.role === "user" ? "chat left" : "chat right";
+    entryDiv.appendChild(entryContentDiv);
+    memoryDiv.appendChild(entryDiv);
+  }
 }
-
-memory.push({ role: "user", content: previousChatJSON.user });
-memory.push({ role: "assistant", content: previousChatJSON.assistant });
 localStorage.removeItem("PreviousChat");
 // console.log(memory)
 
-var initialText = document.getElementById("initialText");
-initialText.className = "displayNone";
-var memoryDiv = document.getElementById("memory");
-memoryDiv.innerHTML = "";
-for (var i = 1; i < memory.length; i++) {
-  var entry = memory[i];
-  var entryDiv = document.createElement("div");
-  var entryContentDiv = document.createElement("div");
-  if (isMultipleFiles) {
-    entryContentDiv.innerHTML =
-      'Files <span style="color:#aaa;">' + filenames + "</span> uploaded";
-    isMultipleFiles = false;
-  } else {
-    entryContentDiv.innerHTML = entry.content;
-  }
-  entryContentDiv.className = "chatBorder code";
-  entryDiv.className = entry.role === "user" ? "chat left" : "chat right";
-  entryDiv.appendChild(entryContentDiv);
-  memoryDiv.appendChild(entryDiv);
-}
 
 function handleFocus() {
   var chatInput = document.getElementById("chatInput");
@@ -111,7 +112,10 @@ function chat() {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ memory }),
+    body: JSON.stringify({
+      code:previousChatJSON,
+      question: codeInput,
+    }),
   })
     .then((response) => response.json())
     .then((chatOutput) => {
